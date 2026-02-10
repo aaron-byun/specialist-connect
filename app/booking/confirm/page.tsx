@@ -1,9 +1,9 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 
-export default function BookingConfirm() {
+function BookingConfirmContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [processing, setProcessing] = useState(false);
@@ -104,5 +104,13 @@ export default function BookingConfirm() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function BookingConfirm() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <BookingConfirmContent />
+    </Suspense>
   );
 }
